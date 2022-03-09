@@ -15,7 +15,7 @@ def show_managers(my_cursor):
 
 
 def show_manager_for_address(my_cursor):
-    address = input("Enter the address: ")
+    address = input("Enter the address (ex. 50187 Springs Terrace): ")
     sql = (
         "SELECT phone as manager_phone, CONCAT_WS(' ', f_name, l_name) as manager_name, email, address"
         " FROM managers, properties"
@@ -35,8 +35,8 @@ def show_manager_for_address(my_cursor):
 
 
 def show_manager_for_resident_name(my_cursor):
-    first = input("Enter first name: ")
-    last = input("Enter last name: ")
+    first = input("Enter first name (ex. Neil): ")
+    last = input("Enter last name (ex. Kilshaw): ")
     sql = (
         "SELECT CONCAT_WS(' ', managers.f_name, managers.l_name) as name, managers.phone, managers.email, p.address"
         " FROM managers"
@@ -49,4 +49,14 @@ def show_manager_for_resident_name(my_cursor):
     )
     my_cursor.execute(sql)
     result = my_cursor.fetchall()
-    print(result)
+    if len(result) > 0:
+        print("\nResponsible manager:\n----------------------")
+        print(
+            "{:<20} {:<15} {:<20} {}".format(
+                "name", "phone", "email", "manager_on_address"
+            )
+        )
+        for manager in result:
+            print("{:<20} {:<15} {:<20} {}".format(*manager))
+    else:
+        print("No manager found...")
