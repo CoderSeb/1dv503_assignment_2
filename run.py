@@ -2,6 +2,7 @@ import mysql.connector as msql
 from mysql.connector import errorcode
 
 from scripts.database import create_database
+from scripts.options import handle_menu
 from scripts.populate import add_content
 from scripts.tables import create_tables
 
@@ -44,6 +45,8 @@ try:
                     )
                 )
                 exit(1)
+        # Showing menu
+        handle_menu(cursor, DEBUG_MODE)
 except Exception as e:
     if DEBUG_MODE:
         print(e)

@@ -1,5 +1,8 @@
+from scripts.queries import *
+
+
 def show_menu():
-    print("\n1 - Option 1")
+    print("\n1 - Show all managers")
     print("2 - Option 2")
     print("3 - Option 3")
     print("4 - Option 4")
@@ -18,7 +21,7 @@ def handle_menu(my_cursor, DEBUG_MODE):
                 print(error)
             print("\nInvalid input...")
         if option == 1:
-            print("Not implemented")
+            show_managers(my_cursor)
             input("\nPress any key to return to the menu... ")
         elif option == 2:
             print("Not implemented")
