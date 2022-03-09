@@ -3,7 +3,7 @@ from scripts.queries import *
 
 def show_menu():
     print("\n1 - Show all managers")
-    print("2 - Option 2")
+    print("2 - Find responsible manager for an address")
     print("3 - Option 3")
     print("4 - Option 4")
     print("5 - Option 5")
@@ -24,7 +24,7 @@ def handle_menu(my_cursor, DEBUG_MODE):
             show_managers(my_cursor)
             input("\nPress any key to return to the menu... ")
         elif option == 2:
-            print("Not implemented")
+            show_manager_for_address(my_cursor)
             input("\nPress any key to return to the menu... ")
         elif option == 3:
             print("Not implemented")
