@@ -32,3 +32,21 @@ def show_manager_for_address(my_cursor):
         )
     else:
         print("No manager found for that address...")
+
+
+def show_manager_for_resident_name(my_cursor):
+    first = input("Enter first name: ")
+    last = input("Enter last name: ")
+    sql = (
+        "SELECT CONCAT_WS(' ', managers.f_name, managers.l_name) as name, managers.phone, managers.email, p.address"
+        " FROM managers"
+        " JOIN properties p on managers.id = p.man_id"
+        " WHERE p.id = (SELECT residents.prop_id"
+        " FROM residents"
+        " WHERE residents.f_name = '{0}' AND residents.l_name = '{1}');".format(
+            first, last
+        )
+    )
+    my_cursor.execute(sql)
+    result = my_cursor.fetchall()
+    print(result)
