@@ -60,3 +60,21 @@ def show_manager_for_resident_name(my_cursor):
             print("{:<20} {:<15} {:<20} {}".format(*manager))
     else:
         print("No manager found...")
+
+
+def list_managers_nr_properties(my_cursor):
+    sql = """SELECT CONCAT_WS(' ', managers.f_name, managers.l_name) as name, COUNT(p.man_id) as number_of_properties, SUM(p.rent) as rent_income
+            FROM managers
+            LEFT JOIN properties p on managers.id = p.man_id
+            GROUP BY name
+            ORDER BY number_of_properties DESC;
+            """
+    my_cursor.execute(sql)
+    result = my_cursor.fetchall()
+    if len(result) > 0:
+        print("\nManagers:\n----------------------")
+        print("{:<20} {:<20} {}".format("name", "nr_of_properties", "rent_income"))
+        for manager in result:
+            print("{:<20} {:<20} {}".format(*manager))
+    else:
+        print("No manager found...")

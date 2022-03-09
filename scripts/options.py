@@ -5,7 +5,7 @@ def show_menu():
     print("\n1 - Show all managers")
     print("2 - Find responsible manager for an address")
     print("3 - Find responsible manager by resident name")
-    print("4 - Option 4")
+    print("4 - List managers and their number of properties")
     print("5 - Option 5")
     print("0 - Exit")
 
@@ -30,7 +30,7 @@ def handle_menu(my_cursor, DEBUG_MODE):
             show_manager_for_resident_name(my_cursor)
             input("\nPress any key to return to the menu... ")
         elif option == 4:
-            print("Not implemented")
+            list_managers_nr_properties(my_cursor)
             input("\nPress any key to return to the menu... ")
         elif option == 5:
             print("Not implemented")
