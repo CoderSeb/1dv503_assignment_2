@@ -78,3 +78,29 @@ def list_managers_nr_properties(my_cursor):
             print("{:<20} {:<20} {}".format(*manager))
     else:
         print("No manager found...")
+
+
+def list_residents_on_address(my_cursor):
+    address = input("Enter address (ex. 7265 Tennessee Drive): ")
+    sql_1 = """SELECT address, postal, rent
+                FROM properties
+                WHERE address = '{}';""".format(
+        address
+    )
+    my_cursor.execute(sql_1)
+    prop = my_cursor.fetchone()
+    sql_2 = """SELECT CONCAT_WS(' ', residents.f_name, residents.l_name) as name, email, phone, address, postal, rent
+    FROM residents
+    JOIN properties p on residents.prop_id = p.id
+    WHERE p.address = '{}';""".format(
+        address
+    )
+    my_cursor.execute(sql_2)
+    result = my_cursor.fetchall()
+    if len(result) > 0:
+        print("\nResidents of {0}, {1} with monthly rent of {2}".format(*prop))
+        print("-----------------------------------------------------")
+        print("{:<26} {:<27} {}".format("name", "email", "phone"))
+        for resident in result:
+            print("{:<26} {:<27} {}".format(*resident))
+
