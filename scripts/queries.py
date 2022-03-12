@@ -52,12 +52,12 @@ def show_manager_for_resident_name(my_cursor):
     if len(result) > 0:
         print("\nResponsible manager:\n----------------------")
         print(
-            "{:<20} {:<15} {:<20} {}".format(
+            "{:<20} {:<15} {:<26} {}".format(
                 "name", "phone", "email", "manager_on_address"
             )
         )
         for manager in result:
-            print("{:<20} {:<15} {:<20} {}".format(*manager))
+            print("{:<20} {:<15} {:<26} {}".format(*manager))
     else:
         print("No manager found...")
 
@@ -89,7 +89,7 @@ def list_residents_on_address(my_cursor):
     )
     my_cursor.execute(sql_1)
     prop = my_cursor.fetchone()
-    sql_2 = """SELECT CONCAT_WS(' ', residents.f_name, residents.l_name) as name, email, phone, address, postal, rent
+    sql_2 = """SELECT CONCAT_WS(' ', residents.f_name, residents.l_name) as name, email, phone
     FROM residents
     JOIN properties p on residents.prop_id = p.id
     WHERE p.address = '{}';""".format(
@@ -103,4 +103,3 @@ def list_residents_on_address(my_cursor):
         print("{:<26} {:<27} {}".format("name", "email", "phone"))
         for resident in result:
             print("{:<26} {:<27} {}".format(*resident))
-

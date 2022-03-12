@@ -2,10 +2,11 @@ import mysql.connector as msql
 from mysql.connector import errorcode
 
 from scripts.database import create_database
-from scripts.options import handle_menu
 from scripts.populate import add_content
 from scripts.tables import create_tables
+from scripts.view import handle_menu
 
+# Settings
 DB_HOST = "localhost"
 DB_USERNAME = "root"
 DB_PASSWORD = "root"
@@ -13,7 +14,7 @@ DB_PORT = 3306
 DB_NAME = "property_manager"
 
 # Set to true to enable full error messages.
-DEBUG_MODE = True
+DEBUG_MODE = False
 
 
 try:
